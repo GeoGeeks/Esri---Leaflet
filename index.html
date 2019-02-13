@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta charset=utf-8 />
-  <title>Showing an ArcGIS basemap</title>
+  <title>Clustering points</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
     <!-- Load Leaflet from CDN -->
@@ -18,6 +18,14 @@
     integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
     crossorigin=""></script>
 
+    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css"
+    integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
+    crossorigin="">
+  <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"
+    integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A=="
+    crossorigin=""></script>
+
+
 
   <style>
     body { margin:0; padding:0; }
@@ -26,13 +34,33 @@
 </head>
 <body>
 
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+<script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+
+<!-- Load Clustered Feature Layer from CDN -->
+<script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
+
 <div id="map"></div>
 
 <script>
-  var map = L.map('map').setView([39, -97.5], 4);
+  var map = L.map('map').setView([4.59, -74.080833], 11);
 
   L.esri.basemapLayer('Streets').addTo(map);
+
+  //  (new constructor syntax at 2.0.0)
+  var capa=L.esri.Cluster.featureLayer({
+    url: 'https://services1.arcgis.com/9vUEN5aDoh5W7aGs/ArcGIS/rest/services/Estaciones_Policia_Bogota/FeatureServer/0'
+  }).addTo(map);
+
+
+  capa.bindPopup(function (layer) {
+    return L.Util.template('<p>Direccion:s{DIRECCION}<br>{BARRIO}<br>{CAI}</p>', layer.feature.properties);
+  });
+
+
 </script>
 
 </body>
 </html>
+s
