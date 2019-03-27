@@ -1,66 +1,89 @@
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset=utf-8 />
-  <title>Clustering points</title>
+  <meta charset="utf-8">
+  <title>ESRI</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
-    <!-- Load Leaflet from CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+
+  <head>
+    <!-- lets load Leaflet's .js and .css from CDN-->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
     crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+
+  <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
     crossorigin=""></script>
 
-
-    <!-- Load Esri Leaflet from CDN -->
-    <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
+  <!-- Load Esri Leaflet from CDN.  it has no .css stylesheet of its own, only .js -->
+  <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
     integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
     crossorigin=""></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css"
+  <!-- Load Esri Leaflet Geocoder from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.css"
     integrity="sha512-v5YmWLm8KqAAmg5808pETiccEohtt8rPVMGQ1jA6jqkWVydV5Cuz3nJ9fQ7ittSxvuqsvI9RSGfVoKPaAJZ/AQ=="
     crossorigin="">
   <script src="https://unpkg.com/esri-leaflet-geocoder@2.2.13/dist/esri-leaflet-geocoder.js"
     integrity="sha512-zdT4Pc2tIrc6uoYly2Wp8jh6EPEWaveqqD3sT0lf5yei19BC1WulGuh5CesB0ldBKZieKGD7Qyf/G0jdSe016A=="
     crossorigin=""></script>
 
-
-
   <style>
-    body { margin:0; padding:0; }
-    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+    html,
+    body,
+    #map {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .custom .leaflet-popup-tip,
+    .custom .leaflet-popup-content-wrapper {
+    background: white;
+    color: black;
+     text-align:center;
+    }
+
   </style>
 </head>
 <body>
+  <div id="map"></div>
+  <script>
+        const map = L.map('map').setView([4.674800, -74.05116],17);
 
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
-<link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
-<script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+        const esriStreets = L.esri.basemapLayer('Streets').addTo(map);
 
-<!-- Load Clustered Feature Layer from CDN -->
-<script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
+        var searchControl = L.esri.Geocoding.geosearch().addTo(map);
 
-<div id="map"></div>
+   		var greenIcon = L.icon({
+    	iconUrl: '	http://geoapps.esri.co/Recursos/EsriLeaflet/Popup.png',
+   	 shadowUrl: '	http://geoapps.esri.co/Recursos/EsriLeaflet/Shadow.png',
 
-<script>
-  var map = L.map('map').setView([4.59, -74.080833], 11);
+    iconSize:     [70, 70], // size of the icon
+    shadowSize:   [50, 50], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [0, 70],  // the same for the shadow
+    popupAnchor:  [10, -100] // point from which the popup should open relative to the iconAnchor
+});
 
-  L.esri.basemapLayer('Streets').addTo(map);
+    // create popup contents
+    var customPopup = "<strong>TE ESTAMOS ESPERANDO</strong><br/> <br/>PARA NUESTRO MEETUP DE ESRI - LEAFLET <br/> <br/>  27 DE MARZO - 5 P.M.<br/> <br/><img 		src='http://joshuafrazier.info/images/maptime.gif' alt='maptime logo gif' width='350px'/>";
 
-  //  (new constructor syntax at 2.0.0)
-  var capa=L.esri.Cluster.featureLayer({
-    url: 'https://services1.arcgis.com/9vUEN5aDoh5W7aGs/ArcGIS/rest/services/Estaciones_Policia_Bogota/FeatureServer/0'
-  }).addTo(map);
+    // specify popup options
+    var customOptions =
+        {
+        'maxWidth': '400',
+        'className' : 'custom'
 
+        }
 
-  capa.bindPopup(function (layer) {
-    return L.Util.template('<p>Direccion:s{DIRECCION}<br>{BARRIO}<br>{CAI}</p>', layer.feature.properties);
-  });
+        	var marker = L.marker([4.673474, -74.05130], {icon: greenIcon}).bindPopup(customPopup,customOptions).addTo(map);
 
+    marker.on('mouseover',function(ev) {
+  ev.target.openPopup();
+});
 
-</script>
-
+  </script>
 </body>
 </html>
-s

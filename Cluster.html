@@ -1,0 +1,61 @@
+<html>
+
+<head>
+
+  <meta charset=utf-8 />
+
+  <title>Clustering points</title>
+
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+  <!-- Cargar Leaflet .js y .css desde CDN -->
+
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+     integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+     crossorigin=""/>
+
+     <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+     integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+     crossorigin=""></script>
+
+  <!-- Cargar Esri Leaflet desde CDN.  Este no tiene hoja de estilo .css, unicamente .js -->
+
+     <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
+     integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
+     crossorigin=""></script>
+
+  <!-- Cargar Leaflet Clustered Feature Layer .css y .js desde CDN -->
+
+     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+
+     <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+
+     <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+
+    <!-- Cargar Esri - Leaflet Clustered Feature Layer desde CDN -->
+
+     <script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
+
+     <style>
+       #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+     </style>
+
+</head>
+
+<body>
+
+  <div id="map"></div>
+
+  <script>
+
+    var map = L.map('map').setView([4.59, -74.080833], 5);
+
+    L.esri.basemapLayer('Gray').addTo(map);
+
+    L.esri.featureLayer( { url: "https://services7.arcgis.com/QJDvB83Gx0niH4Ud/ArcGIS/rest/services/Aeropuertos_Colombia/FeatureServer/0"}).addTo(map);
+
+  </script>
+
+</body>
+
+</html>

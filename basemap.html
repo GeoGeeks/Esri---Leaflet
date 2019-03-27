@@ -1,0 +1,68 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Basemap</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!-- Load Leaflet from CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+    integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+    crossorigin=""></script>
+
+
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
+    integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
+    crossorigin=""></script>
+
+
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script>
+  var gray = L.layerGroup();
+
+  // more than one service can be grouped together and passed to the control together
+  L.esri.basemapLayer("Gray").addTo(gray);
+  L.esri.basemapLayer("DarkGrayLabels").addTo(gray);
+
+
+
+  var map = L.map('map', {
+      center: [8.971449, -79.53418],
+      zoom: 12,
+      layers: [gray]
+  });
+
+  var baseLayers = {
+      "Gray": gray,
+      "DarkGray": L.esri.basemapLayer("DarkGray"),
+    	"Streets": L.esri.basemapLayer("Streets"),
+    	"Topographic": L.esri.basemapLayer("Topographic"),
+    	"NationalGeographic": L.esri.basemapLayer("NationalGeographic"),
+    	"Oceans": L.esri.basemapLayer("Oceans"),
+    	"Imagery": L.esri.basemapLayer("Imagery"),
+   	 "ImageryClarity": L.esri.basemapLayer("ImageryClarity"),
+    	"ImageryFirefly": L.esri.basemapLayer("ImageryFirefly"),
+   		 "ShadedRelief": L.esri.basemapLayer("ShadedRelief"),
+    	"Terrain": L.esri.basemapLayer("Terrain"),
+    	"Physical ": L.esri.basemapLayer("Physical"),
+  };
+
+
+
+  // http://leafletjs.com/reference-1.0.3.html#control-layers
+  L.control.layers(baseLayers).addTo(map);
+</script>
+
+</body>
+</html>
