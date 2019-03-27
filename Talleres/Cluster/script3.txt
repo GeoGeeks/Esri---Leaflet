@@ -1,0 +1,4 @@
+cluster.bindPopup(function (layer) {
+    return L.Util.template('<b> Nombre: {name}',
+    layer.feature.properties);
+    });

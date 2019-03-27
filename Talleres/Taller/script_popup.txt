@@ -1,0 +1,3 @@
+Puntos.bindPopup(function (layer) {
+        return L.Util.template('{ ATRIBUTO }', layer.feature.properties);
+        });

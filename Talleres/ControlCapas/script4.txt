@@ -1,0 +1,14 @@
+var mapasbase = {
+     "Gris": gray,
+     "Gris Oscuro": L.esri.basemapLayer("DarkGray"),
+     "Calles": L.esri.basemapLayer("Streets"),
+     "Imagenes": L.esri.basemapLayer("Imagery")
+     };
+
+ var capas = {
+     "Localidades": localidades,
+     "Estaciones Policia": Policia
+     };
+
+ L.control.layers(mapasbase, capas).addTo(map);
+ 

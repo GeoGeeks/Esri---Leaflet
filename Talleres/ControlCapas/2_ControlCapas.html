@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <meta charset=utf-8 />
+
+  <title>Control Capas</title>
+
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+    <!-- Cargar Leaflet .js y .css desde CDN -->
+
+       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+       integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+       crossorigin=""/>
+
+       <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+       integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+       crossorigin=""></script>
+
+    <!-- Cargar Esri Leaflet desde CDN.  Este no tiene hoja de estilo .css, unicamente .js -->
+
+       <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"
+       integrity="sha512-YZ6b5bXRVwipfqul5krehD9qlbJzc6KOGXYsDjU9HHXW2gK57xmWl2gU6nAegiErAqFXhygKIsWPKbjLPXVb2g=="
+       crossorigin=""></script>
+
+  <style>
+
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+
+  </style>
+
+</head>
+
+<body>
+
+<div id="map"></div>
+
+<script>
+
+  var gray = L.layerGroup();
+    L.esri.basemapLayer("Gray").addTo(gray);
+    L.esri.basemapLayer("GrayLabels").addTo(gray);
+
+  var localidades = L.esri.featureLayer({
+    url: "https://services7.arcgis.com/rxsqAG0ztOQO48WN/ArcGIS/rest/services/LocalidadesDeBogota/FeatureServer/0",
+    color: '#bada55',
+    weight: 2
+  });
+
+  var Policia = L.esri.featureLayer({
+      url: "https://services1.arcgis.com/9vUEN5aDoh5W7aGs/ArcGIS/rest/services/Estaciones_Policia_Bogota/FeatureServer/0"
+  });
+
+  var map = L.map('map', {
+      center: [4.65, -74.080833],
+      zoom: 11,
+      layers: [gray, localidades]
+  });
+
+  var mapasbase = {
+      "Gris": gray,
+      "Gris Oscuro": L.esri.basemapLayer("DarkGray"),
+      "Calles": L.esri.basemapLayer("Streets"),
+      "Imagenes": L.esri.basemapLayer("Imagery")
+  };
+
+  var capas = {
+      "Localidades": localidades,
+      "Estaciones Policia": Policia
+  };
+
+  L.control.layers(mapasbase, capas).addTo(map);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+var redMarker = L.ExtraMarkers.icon({
+    icon: 'fa-leaf',
+    markerColor: 'green',
+    shape: 'penta',
+    prefix: 'fa'
+    });
+
+    var Puntos = L.esri.featureLayer({url:"TU SERVICIO",
+    pointToLayer: function (feature, layer) {
+      return L.marker(layer, {
+        icon: redMarker
+      });
+    },
+    }).addTo(map)  

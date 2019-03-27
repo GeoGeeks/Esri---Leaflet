@@ -1,0 +1,1 @@
+var searchControl = L.esri.Geocoding.geosearch().addTo(map);

@@ -1,0 +1,3 @@
+var Policia = L.esri.featureLayer({
+     url: "https://services1.arcgis.com/9vUEN5aDoh5W7aGs/ArcGIS/rest/services/Estaciones_Policia_Bogota/FeatureServer/0"
+ });

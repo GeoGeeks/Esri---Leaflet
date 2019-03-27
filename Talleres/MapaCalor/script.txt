@@ -1,0 +1,8 @@
+var map = L.map('map').setView([4.59, -74.080833],11);
+
+L.esri.basemapLayer('Gray').addTo(map);
+
+L.esri.Heat.featureLayer({
+url: 'https://services1.arcgis.com/9vUEN5aDoh5W7aGs/ArcGIS/rest/services/Estaciones_Policia_Bogota/FeatureServer/0',
+radius: 50,
+}).addTo(map);

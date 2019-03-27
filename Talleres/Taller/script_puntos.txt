@@ -1,0 +1,5 @@
+var map = L.map('map').setView([4.64583, -74.077479],11);
+
+ var basemap = L.esri.basemapLayer('TU MAPABASE PREFERIDO').addTo(map)
+
+ var Puntos = L.esri.featureLayer({url:"TU SERVICIO"}).addTo(map)

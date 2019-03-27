@@ -1,0 +1,5 @@
+var map = L.map('map', {
+      center: [4.65, -74.080833],
+      zoom: 11,
+      layers: [gray, localidades]
+    });

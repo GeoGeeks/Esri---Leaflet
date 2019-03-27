@@ -1,0 +1,11 @@
+<script>
+
+    var map = L.map('map').setView([4.673474, -74.05130],15);
+
+    var esriStreets = L.esri.basemapLayer('Streets').addTo(map);
+
+    var marker = L.marker([4.673474, -74.05130]).addTo(map)
+
+    marker.bindPopup("Hola Mundo!");
+
+</script>

@@ -1,0 +1,5 @@
+var Localidades = L.esri.featureLayer({url:"SERVICIO LOCALIDADES",
+        color: 'green',
+        weight:1,
+        fillOpacity:0.3
+        }).addTo(map)

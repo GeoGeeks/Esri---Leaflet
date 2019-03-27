@@ -1,0 +1,7 @@
+<!-- Cargar Leaflet.heat desde CDN -->
+
+  <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+<!-- Cargar Heatmap Feature Layer desde CDN -->
+
+  <script src="https://unpkg.com/esri-leaflet-heatmap@2.0.0"></script>

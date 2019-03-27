@@ -1,0 +1,3 @@
+var cluster = L.esri.Cluster.featureLayer({
+    url: 'https://services7.arcgis.com/QJDvB83Gx0niH4Ud/ArcGIS/rest/services/Aeropuertos_Colombia/FeatureServer/0'
+    }).addTo(map);

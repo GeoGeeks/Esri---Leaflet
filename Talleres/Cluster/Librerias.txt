@@ -1,0 +1,11 @@
+<!-- Cargar Leaflet Clustered Feature Layer .css y .js desde CDN -->
+
+    <link rel="stylesheet" type="text/css"           href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.Default.css">
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/leaflet.markercluster@1.0.4/dist/MarkerCluster.css">
+
+    <script src="https://unpkg.com/leaflet.markercluster@1.0.4/dist/leaflet.markercluster.js"></script>
+
+ <!-- Cargar Esri - Leaflet Clustered Feature Layer desde CDN -->
+
+   <script src="https://unpkg.com/esri-leaflet-cluster@2.0.0/dist/esri-leaflet-cluster.js"></script>
